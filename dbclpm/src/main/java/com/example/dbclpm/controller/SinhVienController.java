@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.dbclpm.dao.DangNhapDTO;
+import com.example.dbclpm.dto.DangNhapDTO;
 import com.example.dbclpm.dto.SinhVienDTO;
 import com.example.dbclpm.model.SinhVien;
 import com.example.dbclpm.service.SinhVienService;

@@ -1,4 +1,4 @@
-package com.example.dbclpm.dao;
+package com.example.dbclpm.dto;
 
 public class DangNhapDTO {
 	private String taiKhoan;
