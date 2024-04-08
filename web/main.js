@@ -72,7 +72,6 @@ btnLogin.onclick = () => {
     });
 }
 
-
 function renderData() {
     in4.innerHTML = `<div class="info">
                         <div class="item">
@@ -185,7 +184,7 @@ function renderData() {
                             <div class="modal-content">
                                 <div class="modal-dialog">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="myModalLabel">${dataTenMH}</h5>
+                                        <h6 class="modal-title">${dataTenMH}</h6>
                                     </div>
                                     <div class="modal-body container">
                                         <div class="row border fs-5 bg-dangers text-center red">
