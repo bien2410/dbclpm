@@ -8,70 +8,72 @@ const bangDiem = document.querySelector('.left');
 btnLogin.onclick = () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const loginData = {
-        taiKhoan: username,
-        matKhau: password
-    };
-
-    fetch('http://localhost:8080/sinhVien', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(loginData)
-    })
-    .then(response => {
-      if (response.status === 200) {
-        bangDiem.innerHTML =`<div class="row border fs-5 bg-dangers text-center red">
-                                <div class="col border fw-bold">
-                                Stt
-                                </div>
-                                <div class="col border fw-bold">
-                                Mã môn học
-                                </div>
-                                <div class="col-4 border fw-bold">
-                                Tên môn học
-                                </div>
-                                <div class="col border fw-bold">
-                                Số tín chỉ
-                                </div>
-                                <div class="col border fw-bold">
-                                Điểm thi
-                                </div>
-                                <div class="col border fw-bold">
-                                Điểm TK <br> (10)
-                                </div>
-                                <div class="col border fw-bold">
-                                Điểm TK <br> (4)
-                                </div>
-                                <div class="col border fw-bold">
-                                Điểm TK <br> (C)
-                                </div>
-                                <div class="col border fw-bold">
-                                Kết quả
-                                </div>
-                                <div class="col border fw-bold">
-                                Chi tiết
-                                </div>
-                            </div>`
-        return response.json();
-
-      } else {
-            alert('Đăng nhập thất bại.');
-      }
-    })
-    .then(data => {
-        console.log(data)
-        dataProducts = [...data.dsHocKy]
-        user = [data.maSinhVien, data.hoTen]
-        // console.log(user)
-        renderData()
-    })
-    .catch(error => {
-      console.error('Đã xảy ra lỗi:', error);
-    });
+    if(!username.trim() || !password.trim()){
+        alert('Không được để trống')
+    } else {
+        const loginData = {
+            taiKhoan: username,
+            matKhau: password
+        };
+        fetch('http://localhost:8080/sinhVien', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(loginData)
+        })
+        .then(response => {
+          if (response.status === 200) {
+            bangDiem.innerHTML =`<div class="row border fs-5 bg-dangers text-center red">
+                                    <div class="col border fw-bold">
+                                    Stt
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Mã môn học
+                                    </div>
+                                    <div class="col-4 border fw-bold">
+                                    Tên môn học
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Số tín chỉ
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Điểm thi
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Điểm TK <br> (10)
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Điểm TK <br> (4)
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Điểm TK <br> (C)
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Kết quả
+                                    </div>
+                                    <div class="col border fw-bold">
+                                    Chi tiết
+                                    </div>
+                                </div>`
+            return response.json();
+    
+          } else {
+                alert('Sai tài khoản hoặc mật khẩu!');
+          }
+        })
+        .then(data => {
+            console.log(data)
+            dataProducts = [...data.dsHocKy]
+            user = [data.maSinhVien, data.hoTen]
+            // console.log(user)
+            renderData()
+        })
+        .catch(error => {
+          console.error('Đã xảy ra lỗi:', error);
+        });
+    }
 }
-
 
 function renderData() {
     in4.innerHTML = `<div class="info">
@@ -185,7 +187,7 @@ function renderData() {
                             <div class="modal-content">
                                 <div class="modal-dialog">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="myModalLabel">${dataTenMH}</h5>
+                                        <h6 class="modal-title">${dataTenMH}</h6>
                                     </div>
                                     <div class="modal-body container">
                                         <div class="row border fs-5 bg-dangers text-center red">
