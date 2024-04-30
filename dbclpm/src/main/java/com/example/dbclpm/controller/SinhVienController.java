@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dbclpm.dao.SinhVienDAO;
 import com.example.dbclpm.dto.DangNhapDTO;
 import com.example.dbclpm.dto.SinhVienDTO;
 import com.example.dbclpm.model.SinhVien;
-import com.example.dbclpm.service.SinhVienService;
 
 @Controller
 @RequestMapping("/sinhVien")
 public class SinhVienController {
 	@Autowired
-	private SinhVienService sinhVienService;
+	private SinhVienDAO sinhVienDAO;
 	
 //	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping()
@@ -30,7 +30,7 @@ public class SinhVienController {
 		SinhVien sv = new SinhVien();
 		sv.setTaiKhoan(dangNhapDTO.getTaiKhoan());
 		sv.setMatKhau(dangNhapDTO.getMatKhau());
-		if(sinhVienService.kiemTraDangNhap(sv)) {
+		if(sinhVienDAO.kiemTraDangNhap(sv)) {
 			return new ResponseEntity<>(new SinhVienDTO(sv), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);

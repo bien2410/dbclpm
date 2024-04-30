@@ -74,6 +74,8 @@ public class HocKyDTO {
 	}
 	@Override
 	public String toString() {
-		return "\n" + "Hoc ky " + tenHocKy + " Nam hoc " + tenNamHoc + dsMonHoc;
+		return "HocKyDTO [tenHocKy=" + tenHocKy + ", tenNamHoc=" + tenNamHoc + ", dsMonHoc=" + dsMonHoc + ", dtbhk4="
+				+ dtbhk4 + ", dtbhk10=" + dtbhk10 + ", stcdhk=" + stcdhk + ", dtbtl4=" + dtbtl4 + ", dtbtl10=" + dtbtl10
+				+ ", stctl=" + stctl + "]";
 	}
 }

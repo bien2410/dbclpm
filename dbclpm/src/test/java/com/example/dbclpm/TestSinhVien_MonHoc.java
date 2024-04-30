@@ -1,46 +1,21 @@
 package com.example.dbclpm;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import com.example.dbclpm.dao.DiemThanhPhanDAO;
-import com.example.dbclpm.dao.HocKyDAO;
-import com.example.dbclpm.dao.SinhVienDAO;
-import com.example.dbclpm.dto.SinhVienDTO;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import com.example.dbclpm.model.Diem;
 import com.example.dbclpm.model.DiemThanhPhan;
-import com.example.dbclpm.model.HocKy;
 import com.example.dbclpm.model.MonHoc;
 import com.example.dbclpm.model.MonHoc_DiemThanhPhan;
-import com.example.dbclpm.model.SinhVien;
 import com.example.dbclpm.model.SinhVien_MonHoc;
 
-public class Test {
-	public static void main(String[] args) {
-//		SinhVien sv = new SinhVien();
-//		sv.setTaiKhoan("bien");
-//		sv.setMatKhau("bien");
-//		boolean b = new SinhVienDAO().kiemTraDangNhap(sv);
-//		SinhVienDTO bien = new SinhVienDTO(sv);
-//		System.out.println(bien);
-//		ArrayList<DiemThanhPhan> dtp1 = new ArrayList<>();
-//		ArrayList<DiemThanhPhan> dtp2 = new ArrayList<>();
-//		DiemThanhPhan dtp11 = new DiemThanhPhan(1, "bien", 10);
-//		DiemThanhPhan dtp12 = new DiemThanhPhan(2, "bien2", 20);
-//		DiemThanhPhan dtp21 = new DiemThanhPhan(1, "bien", 10);
-//		DiemThanhPhan dtp22 = new DiemThanhPhan(2, "bien2", 20);
-//		dtp1.add(dtp11);
-//		dtp1.add(dtp12);
-//		dtp2.add(dtp22);
-//		dtp2.add(dtp21);
-//		Collections.sort(dtp1);
-//		Collections.sort(dtp2);
-//		System.out.println(dtp1.equals(dtp2));
-//		float tmp = (5 * 20 + 5.5f * 20 + 10 * 10 + 8.5f * 50) / 100;
-//		tmp -= 0.01;
-//		double tmp = 3.4200000762939453f;
-//		tmp = Math.round(tmp * 100) / 100f;
-//		System.out.println(tmp);
+public class TestSinhVien_MonHoc {
+	private SinhVien_MonHoc sinhVien_MonHoc;
+	
+	public TestSinhVien_MonHoc() {
+		super();
 		DiemThanhPhan dtp1 = new DiemThanhPhan();
 		dtp1.setId(3);
 		dtp1.setTen("Chuyen can");
@@ -81,10 +56,41 @@ public class Test {
 		dsDiem.add(diem1);
 		dsDiem.add(diem2);
 		dsDiem.add(diem3);
-		SinhVien_MonHoc sinhVien_MonHoc;
 		sinhVien_MonHoc = new SinhVien_MonHoc();
 		sinhVien_MonHoc.setMonHoc(monHoc);
 		sinhVien_MonHoc.setDsDiem(dsDiem);
-		System.out.println(sinhVien_MonHoc.check());
+	}
+
+	@Test
+	public void check_testChuan1() {
+		// mon hoc co tat ca cac diem thanh phan trong khoang[0,10]
+		// tong trong so tat ca cac diem thnah phan = 100%
+		// diem thanh phan trung voi diem thanh phan tuong ung cua mon hoc
+		Assertions.assertTrue(sinhVien_MonHoc.check());
+	}
+	@Test
+	public void check_testNgoaiLe1() {
+		// mon hoc co tat ca cac diem thanh phan trong khoang[0,10]
+		sinhVien_MonHoc.getDsDiem().get(0).setSoDiem(11);
+		Assertions.assertFalse(sinhVien_MonHoc.check());
+	}
+	@Test
+	public void check_testNgoaiLe2() {
+		// mon hoc co tat ca cac diem thanh phan trong khoang[0,10]
+		// tong trong so tat ca cac diem thnah phan != 100%
+		sinhVien_MonHoc.getDsDiem().get(0).getDiemThanhPhan().setTrongSo(24);
+		Assertions.assertFalse(sinhVien_MonHoc.check());
+	}
+	@Test
+	public void check_testNgoaiLe3() {
+		// mon hoc co tat ca cac diem thanh phan trong khoang[0,10]
+		// tong trong so tat ca cac diem thnah phan = 100%
+		// diem thanh phan khong trung voi diem thanh phan tuong ung cua mon hoc
+		DiemThanhPhan dtp = new DiemThanhPhan();
+		dtp.setId(0);
+		dtp.setTen("Diem gi do");
+		dtp.setTrongSo(100);
+		sinhVien_MonHoc.getMonHoc().getDsMonHoc_DiemThanhPhan().get(0).setDiemThanhPhan(dtp);
+		Assertions.assertFalse(sinhVien_MonHoc.check());
 	}
 }

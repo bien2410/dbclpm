@@ -43,7 +43,7 @@ public class SinhVienDAO extends DAO{
 		}
 		return result;
 	}
-	private static void khoiTao() {
+	public static void khoiTao() {
 		dsHocKy = new HocKyDAO().layDsHocKy();
 		dsDiemThanhPhan  = new DiemThanhPhanDAO().layDsDiemThanhPhan();
 	}

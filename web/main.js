@@ -5,9 +5,11 @@ const btnLogin = document.getElementById('btnLogin');
 const in4 = document.querySelector('.form-container');
 const bangDiem = document.querySelector('.left');
 
-btnLogin.onclick = () => {
+btnLogin.onclick = (event) => {
+    event.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    console.log(username)
     if(!username.trim() || !password.trim()){
         alert('Không được để trống')
     } else {
