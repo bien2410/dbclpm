@@ -64,7 +64,7 @@ public class TestSinhVien_MonHoc {
 	@Test
 	public void check_testChuan1() {
 		// mon hoc co tat ca cac diem thanh phan trong khoang[0,10]
-		// tong trong so tat ca cac diem thnah phan = 100%
+		// tong trong so tat ca cac diem thanh phan = 100%
 		// diem thanh phan trung voi diem thanh phan tuong ung cua mon hoc
 		Assertions.assertTrue(sinhVien_MonHoc.check());
 	}

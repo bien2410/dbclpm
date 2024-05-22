@@ -20,6 +20,7 @@ public class SinhVienDTO {
 		dsHocKy = new ArrayList<>();
 		ArrayList<SinhVien_MonHoc> dsSv_Mh = sv.getDsSinhVien_MonHoc();
 		Collections.sort(dsSv_Mh);
+		if(dsSv_Mh.size() <= 0) return;
 		HocKy hocKy = dsSv_Mh.get(0).getHocKy();
 		ArrayList<SinhVien_MonHoc> dsTmp = new ArrayList<>();
 		float dtbtl10 = 0;
